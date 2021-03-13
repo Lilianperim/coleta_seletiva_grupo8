@@ -17,7 +17,7 @@ const routes = [{
         component: Contato
     },
     {
-        path: '/',
+        path: '/TelaInicial',
         name: 'TelaInicial',
         component: TelaInicial
     }

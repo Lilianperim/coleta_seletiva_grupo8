@@ -138,8 +138,4 @@ td {
 .combox {
   margin-top: 30px;
 }
-
-hr{
-  color:#7CB342;
-}
 </style>
