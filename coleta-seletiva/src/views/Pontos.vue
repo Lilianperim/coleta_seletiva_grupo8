@@ -3,7 +3,7 @@
    
     <v-card class="mx-auto card" max-width="80vw">
       <div class="borda">
-       <h2 class="text-h5 text-center mb-3 mt-5">Pontos de Coleta</h2>
+       <h2 class="text-h5 text-center mb-3 mt-5 fonte">Pontos de Coleta</h2>
       </div>
      <v-combobox class="combox"
     v-model="chips"
@@ -77,14 +77,14 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Sulphur+Point&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@700&display=swap');
 
 .titulo{
   font-size: 20px;
 }
 
-body {
-  font-family: 'Sulphur Point', sans-serif;
+.fonte{
+    font-family: 'Sulphur Point', sans-serif;
 }
 
 td {
@@ -104,7 +104,6 @@ td {
 
 .texto{
   margin-right: 20px;
-  font-size:10px;
 }
 
 .search{
