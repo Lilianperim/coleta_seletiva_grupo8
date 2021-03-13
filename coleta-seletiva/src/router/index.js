@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Pontos from '../views/Pontos.vue'
 
 Vue.use(VueRouter)
 
 const routes = [{
-    path: '/',
-    name: 'Home',
-    component: Home
-}, ]
+    path: '/pontos',
+    name: 'Pontos',
+    component: Pontos
+}]
 
 const router = new VueRouter({
     routes
