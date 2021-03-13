@@ -1,0 +1,1 @@
+# coleta_seletiva_grupo8
