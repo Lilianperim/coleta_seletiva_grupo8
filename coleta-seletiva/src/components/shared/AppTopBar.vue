@@ -4,7 +4,7 @@
     <v-app-bar app color="white">
       <v-app-bar-nav-icon class="menu" @click="drawer = true"></v-app-bar-nav-icon>
       <v-toolbar-title class="titulo">
-          EcoGram
+          Eco<span>Gram</span>
       </v-toolbar-title>
     </v-app-bar>
 
@@ -61,5 +61,8 @@ export default {
 
 .menu{
     color:black;
+}
+span{
+  color:black;
 }
 </style>

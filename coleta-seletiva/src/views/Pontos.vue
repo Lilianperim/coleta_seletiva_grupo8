@@ -5,35 +5,34 @@
       <div class="borda">
        <h2 class="text-h5 text-center mb-3 mt-5">Pontos de Coleta</h2>
       </div>
-      <v-toolbar
-      dense
-      floating
+     <v-combobox class="combox"
+    v-model="chips"
+    :items="items"
+    chips
+    clearable
+    label="Categorias"
+    multiple
+    prepend-icon="mdi-filter-variant"
+    solo
+  >
+    <template v-slot:selection="{ attrs, item, select, selected }">
+      <v-chip
+        v-bind="attrs"
+        :input-value="selected"
+        close
+        @click="select"
+        @click:close="remove(item)"
       >
-      <v-text-field
-        hide-details
-        prepend-icon="mdi-magnify"
-        single-line
-      ></v-text-field>
-
-      <v-btn icon>
-        <v-icon>mdi-crosshairs-gps</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-    </v-toolbar>
-      <v-list-item class="titulo-fodase">
-        <v-list-item-icon class="titulo-fodase">Escudo</v-list-item-icon>
-        <v-list-item-title class="d-flex justify-center titulo-fodase" id="clube-fodase2">Clube</v-list-item-title>
-        <span class="titulo-fodase">Pontos</span>
-      </v-list-item>
-      <v-list-item v-for="clube of ordernarClubes" :key="clube.id">
+        <strong>{{ item }}</strong>&nbsp;
+      </v-chip>
+    </template>
+  </v-combobox>
+      <v-list-item v-for="lista of ordernarLista" :key="lista.id">
         <v-list-item-icon size="24">
-          <img :src="clube.escudo" :alt="clube.nome" />
+          <img class="img" :src="lista.imagem" :alt="lista.nome" />
         </v-list-item-icon>
-        <v-list-item-title class="d-flex justify-center clube-fodase">{{ clube.nome }}</v-list-item-title>
-        <span class="mr-3">{{ clube.pontos}}</span>
+        <v-list-item-title class="d-flex justify-center texto">{{ lista.nome }}</v-list-item-title>
+        <span class="mr-3">{{ lista.pontos}}</span>
       </v-list-item>
     </v-card>
   </v-container>
@@ -41,10 +40,10 @@
 
 <script>
 export default {
-  name: "ClubesLista",
+  name: "Lista",
   computed: {
-    ordernarClubes() {
-      const ordernar = this.clubesTabela
+    ordernarLista() {
+      const ordernar = this.lista
         .slice(0)
         .sort((a, b) => (a.pontos > b.pontos ? -1 : 1));
       return ordernar;
@@ -52,24 +51,35 @@ export default {
   },
   data() {
     return {
-      clubesTabela: [],
+    lista: [],
+    chips: ['Aço', 'pilhas','óleo de cozinha','borracha','capsulas de café','isopor','remédios','raio-x','entulhos'],
+    items: ['Aço', 'pilhas','óleo de cozinha','borracha','capsulas de café','isopor','remédios','raio-x','entulhos'],
     };
   },
+
+   methods: {
+      remove (item) {
+        this.chips.splice(this.chips.indexOf(item), 1)
+        this.chips = [...this.chips]
+      },
+    },
+
   created() {
-    fetch("https://hackthon-decola.firebaseio.com/clubes-lista.json").then(
+    fetch("https://it3kjy-default-rtdb.firebaseio.com/coletaSeletiva.json?print=pretty").then(
       (res) =>
         res.json().then((json) => {
-          this.clubesTabela = json;
+          this.lista = json;
         })
     );
   },
 };
+
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Sulphur+Point&display=swap');
 
-.titulo-fodase {
+.titulo{
   font-size: 20px;
 }
 
@@ -83,17 +93,31 @@ td {
 
 .card{
   border-radius: 50px;
-  border: 1px solid #00E676;
+  border: 1px solid #7CB342;
   padding: 10px;
+   margin-top: 30px;
 }
 
 .borda{
-  border-bottom: 1px solid #00E676;
+  border-bottom: 1px solid #7CB342;
 }
 
-.clube-fodase {
+.texto{
   margin-right: 20px;
+  font-size:10px;
 }
 
+.search{
+    margin-top:20px;
+}
+
+.img{
+    width:40px;
+    height: 30px;
+    border-radius: 20px;;
+}
+.combox{
+    margin-top:30px;
+}
 
 </style>
